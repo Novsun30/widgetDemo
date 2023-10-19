@@ -6,14 +6,14 @@ const widgetContainers = [];
 async function fetchEidsFromAPI() {
 	try {
 		const response = await fetch(
-		// 修改此處event type id的值來變更球種(預設為4)
-		// 修改count值以設定多少張卡片(預設為6)
-		"https://quote-cdn.uni247.xyz/api/quote/vsb/overall-matches/light/v1/?event_type_id=2&count=5",
+		// 修改此處 event_type_id 的值來變更球種，預設為4
+		// 修改 count 值以設定多少張卡片，預設為6
+		'https://webapi.ckex.xyz/dev-f/quote/vsb/overall-matches/light/v1/?event_type_id=2&count=5',
 		{
 			method: "GET",
 			headers: {
 				// 添加自定義標頭
-				Authorization: "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODg1YWI5NDQtNzhmMS00NmZkLTgzNTItNDc1MTJlM2VhOTY3IiwicGxheWVyX2lkIjoiaW5kaWFfMy4wX2Zvcl9kaXNwbGF5IiwibWVyY2hhbnRfY29kZSI6ImJhY2tvZmZpY2UtZDllMzIiLCJpc3N1ZWRfYXQiOiIyMDIyLTEwLTI4VDA4OjA5OjUzLjU0ODE0ODcyNloiLCJleHBpcmVzX2F0IjoiMjEyMi0xMC0yOFQwMDowMDowMC4wMDAwMDE2ODdaIn0.WEL6t_UEf8KglL-p_OLQe5xsHhDgaDelQMYZniCkcGk",
+				Authorization: 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNGRhMWU5ZDgtMWUxZS00NGMzLTkxNmMtNTgxOGQyYmU0YmRhIiwicGxheWVyX2lkIjoiY2tleF90ZXN0X3BsYXllcjEiLCJtZXJjaGFudF9jb2RlIjoiYmFja29mZmljZS1kOWUzMiIsImlzc3VlZF9hdCI6IjIwMjMtMDItMTBUMDg6NTc6MjkuOTExNzA3NDE1WiIsImV4cGlyZXNfYXQiOiIyMDMwLTAyLTEwVDAwOjAwOjAwLjAwMDAwMDYzNFoiLCJsYW5ndWFnZSI6ImVuIn0.1HzNrrIGrETdgTpANw6IAh2ZNvpr4sG0-n7jnPIIlnw',
 				// 適當設置其他標頭
 				"Content-Type": "application/json",
 			},
@@ -58,9 +58,9 @@ async function createWidgets() {
 		widgetContainer.setAttribute(
 			"data-props",
 			JSON.stringify({
-				// 修改type的值變更比分卡類型
+				// 修改 type 的值變更比分卡類型
 				// scoreboard:板球 soccer:足球 others:其他球種
-				type: "others",
+				type: "scoreboard",
 				eid: eid,
 				width: "238px",
 				secondary_background_color: "#1A1A1A",
