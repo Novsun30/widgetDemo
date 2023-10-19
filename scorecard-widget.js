@@ -8,7 +8,7 @@ async function fetchEidsFromAPI() {
 		const response = await fetch(
 		// 修改此處 event_type_id 的值來變更球種，預設為4
 		// 修改 count 值以設定多少張卡片，預設為6
-		'https://webapi.ckex.xyz/dev-f/quote/vsb/overall-matches/light/v1/?event_type_id=2&count=5',
+		'https://webapi.ckex.xyz/dev-f/quote/vsb/overall-matches/light/v1/?event_type_id=2&count=6',
 		{
 			method: "GET",
 			headers: {
@@ -60,7 +60,7 @@ async function createWidgets() {
 			JSON.stringify({
 				// 修改 type 的值變更比分卡類型
 				// scoreboard:板球 soccer:足球 others:其他球種
-				type: "scoreboard",
+				type: "others",
 				eid: eid,
 				width: "238px",
 				secondary_background_color: "#1A1A1A",
