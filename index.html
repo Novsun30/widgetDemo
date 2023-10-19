@@ -1,115 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <title>Test</title>
-  </head>
-  <body>
-   <div 
-      class="himalaya-dashboard" 
-      data-props='{
-        "type": "soccer", 
-        "eid": "41887833-e", 
-        "width": "238px", 
-        "secondary_background_color": "rgb(26, 26, 26)", 
-        "text_primary_color": "#FFFFFF",
-        "quick_link_border_color": "",
-        "lang": "en"
-      }'
-    ></div>
-    <div 
-    class="himalaya-dashboard" 
-    data-props='{
-      "type": "soccer", 
-      "eid": "41887835-e", 
-      "width": "238px", 
-      "secondary_background_color": "#FFFFFF", 
-      "text_primary_color": "#000",
-      "quick_link_border_color": "",
-      "lang": "en"
-    }'
-    ></div>
-    <div 
-    class="himalaya-dashboard" 
-    data-props='{
-      "type": "soccer", 
-      "eid": "41887837-e", 
-      "width": "238px", 
-      "secondary_background_color": "rgb(26, 26, 26)", 
-      "text_primary_color": "#FFFFFF",
-      "quick_link_border_color": "",
-      "lang": "en"
-    }'
-     ></div>
-    <div 
-    class="himalaya-dashboard" 
-    data-props='{
-      "type": "soccer", 
-      "eid": "41887841-e", 
-      "width": "238px", 
-      "secondary_background_color": "#FFFFFF", 
-      "text_primary_color": "#000",
-      "quick_link_border_color": "",
-      "lang": "en"
-    }'
-    ></div>
-    <div 
-      class="himalaya-dashboard" 
-      data-props='{
-        "type": "soccer", 
-        "eid": "41887843-e", 
-        "width": "238px", 
-        "secondary_background_color": "rgb(26, 26, 26)", 
-        "text_primary_color": "#FFFFFF",
-        "quick_link_border_color": "",
-        "lang": "th"
-      }'
-    ></div>
-
-      <div 
-      class="himalaya-dashboard" 
-      data-props='{
-        "type": "soccer", 
-        "eid": "41887839-e", 
-        "width": "238px", 
-        "secondary_background_color": "rgb(26, 26, 26)", 
-        "text_primary_color": "#FFFFFF",
-        "quick_link_border_color": "red",
-        "lang": "vi"
-      }'
-    ></div>
-
-<!--     <div 
-      class="himalaya-dashboard" 
-      data-props='{
-        "type": "scoreboard", 
-        "eid": "41282223-e", 
-        "width": "238px", 
-        "secondary_background_color": "rgb(26, 26, 26)", 
-        "text_primary_color": "#FFFFFF",
-        "quick_link_border_color": "red",
-        "lang": "hi"
-      }'
-    ></div>
-
-    <div 
-    class="himalaya-dashboard" 
-    data-props='{
-      "type": "scoreboard", 
-      "eid": "41282223-e", 
-      "width": "238px", 
-      "secondary_background_color": "rgb(26, 26, 26)", 
-      "text_primary_color": "#FFFFFF",
-      "quick_link_border_color": "red",
-      "lang": "zh"
-    }'
-  ></div> -->
-  <script defer="defer" src="https://storage.googleapis.com/staging.djent-28b47.appspot.com/main.js"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<style>
+			#scorecard {
+				display: flex;
+				gap: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 渲染比分卡组件的容器 -->
+		<div id="scorecard"></div>
+		<script src="scorecard-widget.js"></script>
+	</body>
 </html>
