@@ -8,7 +8,7 @@ async function fetchEidsFromAPI() {
 		const response = await fetch(
 		// 修改此處event type id的值來變更球種(預設為4)
 		// 修改count值以設定多少張卡片(預設為6)
-		"https://quote-cdn.uni247.xyz/api/quote/vsb/overall-matches/light/v1/?event_type_id=2&count=6",
+		"https://quote-cdn.uni247.xyz/api/quote/vsb/overall-matches/light/v1/?event_type_id=2&count=5",
 		{
 			method: "GET",
 			headers: {
