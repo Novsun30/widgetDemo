@@ -1,14 +1,26 @@
 // 存儲已加載的腳本 URL
 const loadedScripts = [];
 const widgetContainers = [];
+const widgetDataProps = {
+  // 修改 type 的值變更比分卡類型
+  // scoreboard:板球 soccer:足球 others:其他球種
+  type: 'scoreboard',
+  width: '238px',
+  secondary_background_color: '#1A1A1A',
+  text_primary_color: '#FFFFFF',
+  quick_link_border_color: '#989898',
+  lang: 'en',
+  team_logo_size: '29px',
+  text_ratio: '1',
+};
 
-// 通過 API 獲取 eids
-async function fetchEidsFromAPI() {
+// 通過 API 獲取 eid 和 odds
+async function fetchEidsAndOddsFromAPI() {
   try {
     const response = await fetch(
       // 修改此處 event_type_id 的值來變更球種，預設為4
       // 修改 count 值以設定多少張卡片，預設為6
-      'https://quote-cdn.uni247.xyz/api/quote/vsb/overall-matches/light/v1/?event_type_id=sr:sport:6&count=6',
+      'https://quote-cdn.uni247.xyz/api/quote/vsb/overall-matches/light/v1/?event_type_id=4&count=10',
       {
         method: 'GET',
         headers: {
@@ -20,7 +32,7 @@ async function fetchEidsFromAPI() {
       },
     );
     const data = await response.json();
-    return data.data.map((d) => d.event_id);
+    return data.data.map((d) => ({ eid: d.event_id, odds: d.m }));
   } catch (error) {
     console.error('Error fetching eids:', error);
     return null;
@@ -33,6 +45,7 @@ async function loadWidgetScript() {
     const script = document.createElement('script');
     script.src = 'https://storage.googleapis.com/oddsbeta-web-stage/widgetsV2/main.js';
     script.async = true;
+    script.id = 'widgetScript';
     document.body.appendChild(script);
     loadedScripts.push('widget');
     return new Promise((resolve) => {
@@ -42,32 +55,34 @@ async function loadWidgetScript() {
   return Promise.resolve();
 }
 
-// 創建小部件並將 eids 應用於它
+// 創建小部件並將 eid 和 odds 應用於它
 async function createWidgets() {
-  // 取 eids
-  const eids = await fetchEidsFromAPI();
-  if (!eids.length) {
+  // 取 eid 和 odds
+  const eidAndOdds = await fetchEidsAndOddsFromAPI();
+  if (!eidAndOdds.length) {
     console.error('Failed to fetch eids.');
     return;
   }
   // 創建比分卡
-  eids.forEach(async (eid) => {
+  eidAndOdds.forEach(async (data, index) => {
     const widgetContainer = document.createElement('div');
     widgetContainer.className = 'himalaya-dashboard';
     widgetContainer.setAttribute(
       'data-props',
       JSON.stringify({
-        // 修改 type 的值變更比分卡類型
-        // scoreboard:板球 soccer:足球 others:其他球種
-        type: 'others',
-        eid,
-        width: '238px',
-        secondary_background_color: '#1A1A1A',
-        text_primary_color: '#FFFFFF',
-        quick_link_border_color: '#989898',
-        lang: 'en',
+        type: widgetDataProps.type,
+        eid: data.eid,
+        odds: data.odds,
+        width: widgetDataProps.width,
+        secondary_background_color: widgetDataProps.secondary_background_color,
+        text_primary_color: widgetDataProps.text_primary_color,
+        quick_link_border_color: widgetDataProps.quick_link_border_color,
+        lang: widgetDataProps.lang,
+        team_logo_size: widgetDataProps.team_logo_size,
+        text_ratio: widgetDataProps.text_ratio,
       }),
     );
+    widgetContainer.id = `widget${index}`;
     document.getElementById('scorecard').appendChild(widgetContainer);
     widgetContainers.push(widgetContainer);
   });
@@ -91,3 +106,38 @@ window.addEventListener('beforeunload', () => {
 
 // 執行創建小部件的函數
 createWidgets();
+
+// 30 秒更新一次賠率資訊
+setInterval(async () => {
+  const scriptElem = document.getElementById('widgetScript');
+  scriptElem.remove();
+  const eidAndOdds = await fetchEidsAndOddsFromAPI();
+  if (!eidAndOdds.length) {
+    console.error('Failed to fetch eids.');
+    return;
+  }
+  eidAndOdds.forEach((data, index) => {
+    const widget = document.getElementById(`widget${index}`);
+    widget.setAttribute(
+      'data-props',
+      JSON.stringify({
+        type: widgetDataProps.type,
+        eid: data.eid,
+        odds: data.odds,
+        width: widgetDataProps.width,
+        secondary_background_color: widgetDataProps.secondary_background_color,
+        text_primary_color: widgetDataProps.text_primary_color,
+        quick_link_border_color: widgetDataProps.quick_link_border_color,
+        lang: widgetDataProps.lang,
+        team_logo_size: widgetDataProps.team_logo_size,
+        text_ratio: widgetDataProps.text_ratio,
+      }),
+    );
+  });
+  const script = document.createElement('script');
+  script.src = 'https://storage.googleapis.com/oddsbeta-web-stage/widgetsV2/main.js';
+  script.async = true;
+  script.id = 'widgetScript';
+  document.body.appendChild(script);
+}, 1000 * 30);
+
