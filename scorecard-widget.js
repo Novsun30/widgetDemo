@@ -5,17 +5,19 @@ const widgetContainers = [];
 // 比分卡 data-props 參數
 const widgetDataProps = {
   optimized_mode: true,
-  type: 'scoreboard', // 變更比分卡類型，scoreboard:板球 soccer:足球 others:其他球種
+  type: 'cricketExchange', // 變更比分卡類型，scoreboard:板球 soccer:足球 others:其他球種
   event_type_id: '4', // 球種資料id，板球: 4、足球: 1、網球: 2
   count: '10', // 要顯示的比分卡張數
-  width: '238px',
-  secondary_background_color: '#1A1A1A',
-  text_primary_color: '#FFFFFF',
-  text_secondary_color: '#333333',
-  secondary_color: '#AAA8A8',
-  lang: 'en',
-  team_logo_size: '29px',
-  text_ratio: '1',
+  width: '',
+  secondary_background_color: '',
+  text_primary_color: '',
+  text_secondary_color: '',
+  secondary_color: '',
+  border_color: '',
+  quick_link_border_color: '',
+  lang: '',
+  team_logo_size: '',
+  text_ratio: '',
 };
 
 // 獲取 widget 腳本
