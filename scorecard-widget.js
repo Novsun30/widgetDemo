@@ -7,7 +7,7 @@ const widgetDataProps = {
   optimized_mode: true,
   type: 'cricketExchange', // 變更比分卡類型，scoreboard:板球 soccer:足球 others:其他球種
   event_type_id: '4', // 球種資料id，板球: 4、足球: 1、網球: 2
-  count: '10', // 要顯示的比分卡張數
+  count: '6', // 要顯示的比分卡張數
   width: '',
   secondary_background_color: '',
   text_primary_color: '',
